@@ -1,0 +1,1441 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+<style>
+table, th, td {
+    border: 1px solid black;
+    padding: 0px 0px 0px 0px;
+}
+
+
+DIV.table
+{
+    display:table;
+}
+FORM.tr, DIV.tr
+{
+    display:table-row;
+}
+SPAN.td
+{
+    display:table-cell;
+}
+
+
+label {
+    display: inline-block;
+    width:130px;
+    text-align: left;
+    padding: 0px 0px 2px 0px;
+}
+
+.smallsection1 {
+   float: left;
+   margin: 10px;
+   padding: 10px;
+   max-width: 400px;
+   height: 40px;
+   border: 1px white;
+}
+p.clear {
+    clear: both;
+}
+.center {
+    margin: auto;
+    width: 60%;
+    border: 3px white;
+    padding: 10px;
+    text-align: center;
+}
+p.serif {
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+}
+
+</style>
+
+
+
+<!--
+It is the "Direct Input" mode of the validator that defaults to UTF-8. User-agents (browsers)
+will default to other encodings based on a number of things.
+I'm using the charset=UTF-8 to take the guesswork out of the W3C Markup validator
+-->
+
+  <title>APL Salary Calculation Page</title>
+</head>
+
+
+<body>
+<div class= "center">
+<h1 style="font-family:'FOOTLIGHT MT LIGHT', cursive;">Welcome to the Austin Public Library Employee Salary Management Page</h1>
+
+<IMG SRC="http://library.austintexas.gov/sites/default/files/1_blue_apl_logo_web-01.png" ALT="APL" WIDTH=200 HEIGHT=70><br>
+</div>
+
+
+<div class= "center">
+<h3 class = "serif">Candidate Information</h3>
+</div>
+
+<div class="smallsection1">
+Full Name: <input type="text" id="FullName" size="50"><br>
+</div>
+
+<div class="smallsection1">
+Position Number: <input type="text" id="PositionNumber" size="50"><br>
+</div>
+
+<div class="smallsection1">
+Work Week Hours: <input type="text" id="workWeekHours" size="50"><br>
+</div>
+
+<p class="clear">
+
+
+<div class="smallsection1">
+<p>Select Location Code:
+<select name = "locationCodes" id="locationCodes">
+<option value="SelectOption" >Select Option</option>
+<option value="KA0010 Administration (ACAO)">KA0010 Administration (ACAO)</option>
+<option value="KA0010 Administration-Marketing (AOPP)">KA0010 Administration-Marketing (AOPP)</option>
+<option value="KA0020 Facility Services-Building & Grounds (ACFS)">KA0020 Facility Services-Building & Grounds (ACFS)</option>
+<option value="KA0020 Facility Services-Security (ACFS)">KA0020 Facility Services-Security (ACFS)</option>
+<option value="KA0020 Facility Services (ACFS)">KA0020 Facility Services (ACFS)</option>
+<option value="KA0035 Youth Services (ACYS)">KA0035 Youth Services (ACYS)</option>
+<option value="KA0100 Library Information Systems (ALIS)">KA0100 Library Information Systems (ALIS)</option>
+<option value="KA0110 Austin History Center (AHC)">KA0110 Austin History Center (AHC)</option>
+<option value="KA0130 Branch Services (ACBR)">KA0130 Branch Services (ACBR)</option>
+<option value="KA0150 Central Library Services (ACLS)">KA0150 Central Library Services (ACLS)</option>
+<option value="KA0160 Carver (ACB)">KA0160 Carver (ACB)</option>
+<option value="KA0165 Southeast (ASE)">KA0165 Southeast (ASE)</option>
+<option value="KA0170 Cepeda (ACP)">KA0170 Cepeda (ACP)</option>
+<option value="KA0175 Howson (AHO)">KA0175 Howson (AHO)</option>
+<option value="KA0180 Little Walnut (ALW)">KA0180 Little Walnut (ALW)</option>
+<option value="KA0185 Manchaha (AMR)">KA0185 Manchaha (AMR)</option>
+<option value="KA0190 Yarbrough (AYB)">KA0190 Yarbrough (AYB)</option>
+<option value="KA0195 North Village (ANV)">KA0195 North Village (ANV)</option>
+<option value="KA0200 Willie Mae Kirk (AWK)">KA0200 Willie Mae Kirk (AWK)</option>
+<option value="KA0205 Old Quarry (AOQ)">KA0205 Old Quarry (AOQ)</option>
+<option value="KA0210 Pleasant Hill (APH)">KA0210 Pleasant Hill (APH)</option>
+<option value="KA0215 Ruiz (ARZ)">KA0215 Ruiz (ARZ)</option>
+<option value="KA0220 Spicewood Springs (ASR)">KA0220 Spicewood Springs (ASR)</option>
+<option value="KA0225 Terrazas-ATB (ATB)">KA0225 Terrazas-ATB (ATB)</option>
+<option value="KA0230 Twin Oaks (ATO)">KA0230 Twin Oaks (ATO)</option>
+<option value="KA0235 University Hills (AUH)">KA0235 University Hills (AUH)</option>
+<option value="KA0240 Windsor Park (AWP)">KA0240 Windsor Park (AWP)</option>
+<option value="KA0245 Hampton at Oak Hill (AOK)">KA0245 Hampton at Oak Hill (AOK)</option>
+<option value="KA0250 Milwood (AMI)">KA0250 Milwood (AMI)</option>
+<option value="KA0255 St. Johns (ASJ)">KA0255 St. Johns (ASJ)</option>
+<option value="KAO260 Cataloging & Collection (ACCS)">KAO260 Cataloging & Collection (ACCS)</option>
+<option value="KAO265 Austin Customer Service Div. (ACSD)">KAO265 Austin Customer Service Div. (ACSD)</option>
+</select>
+</p>
+</div>
+
+
+
+
+
+<div class="smallsection1">
+<p>Select from the following candidate options:
+<select name="EmployeeStatus" id="EmployeeStatus" onchange="FindEmployeeStatus()">
+  <option value="SelectOption">Select Option</option>
+  <option value="NewEmployee">New Employee</option>
+  <option value="CurrentEmployee">Current Employee</option>
+  <option value="PastEmployee">Past Employee</option>
+</select>
+</p>
+</div>
+
+
+
+<p class="clear">
+<div hidden id="PastCoAEmployeeChecker">
+<p>Is candidate eligible for rehire?:<br>
+<select name="PastEmployeeCheck" id="PastEmployeeCheck" onchange="FindEmployeeEligible()">
+  <option value="SelectOption">Select Option</option>
+  <option value="Yes">Yes</option>
+  <option value="No">No</option>
+  </select>
+  </p>
+
+
+
+
+
+<div hidden id="NotEligible">
+<label>HRD rep who confirmed action:</label>
+  <label><input type="text" id="NameOfRepresentive" size="30"></label><br>
+  <label>Date Confirmed with HRD:</label>
+  <label><input type="date" name="ActionConfirmed" size="30"></label>
+</div>
+
+</div>
+
+<!--
+This is the section for new employees. Past employees will use the save div block
+-->
+ <div hidden id="NewEmployee">
+
+   <!--
+  This div block will only check if they are eligible.
+  If eligible, they will be using the "NewEmployee" div block. Otherwise, if they are not eligible,
+  they will be asked to note down any addtional comments and representive who confirmed.
+   -->
+
+   <br>
+   <label>New Hire</label>
+   <label><input type="radio" name="TypeOfHire" value="New Hire" ></label><br>
+   <label>Temporary Hire</label>
+   <label><input type="radio" name="TypeOfHire" value="Temporary Hire"></label><br>
+   <label>Title:</label>
+   <label><input type="text" id="NewCoaTitleForNewEmployee" size="30"></label><br>
+   <label>Pay Grade:</label>
+   <label><input type="text" id="NewPayGradeForNewEmployee" size="30"></label><br>
+ </div>
+
+
+
+  <div hidden id="CurrentEmployee">
+
+    <label>Current Title:</label>
+     <label><input type="text" id="CurrentTitleForCurrentEmployee" size="20"></label><br>
+    <label>Current Pay Grade: </label>
+    <label><input type="text" id="CurrentPayGradeForCurrentEmployee" size="20"></label><br>
+    <label>New Title: </label>
+    <label><input type="text" id="NewTitleForCurrentEmployee" size="20"></label><br>
+    <label>New Pay Grade: </label>
+    <label><input type="text" id="NewPayGradeForCurrentEmployee" size="20"></label><br>
+
+    <input type="radio" name="TypeOfHire" value="ReclassificationAdjustment" > Reclassification Adjustment<br>
+    <input type="radio" name="TypeOfHire" value="Promotion"> Promotion<br>
+    <input type="radio" name="TypeOfHire" value="StatusChange" > Status Change<br>
+    <input type="radio" name="TypeOfHire" value="LateralTransfer"> Lateral Transfer<br>
+    <input type="radio" name="TypeOfHire" value="MarketStudy" > Market Study<br>
+    <input type="radio" name="TypeOfHire" value="VoluntaryReassignment" > Voluntary Reassignment<br>
+    <input type="radio" name="TypeOfHire" value="Demotion" > Demotion<br>
+
+ </div>
+
+
+ <div class= "center">
+ <h3 class = "serif">Position Minimum Qualifications</h3>
+ </div>
+
+
+
+
+
+<p><a href="http://austintexas.gov/hr/jobdesc/job_title_pay.cfm" target="_blank">City of Austin Link</a></p>
+Enter the mimimum Qualifications:<br>
+<textarea id = "textarea" rows="5" cols="150" maxlength= "750" style="overflow:hidden;resize:none" onkeypress="countLines(this)" ></textarea>
+<div><span id="lineCount"></span></div>
+
+<div class= "center">
+<h3 class = "serif">Candidate Applicable Experience</h3>
+</div>
+
+
+
+<table id = "ListOfEmployement" style="width:30%">
+  <tr>
+    <th>Employer Name</th>
+    <th>Title</th>
+    <th>Part Time</th>
+    <th>Full Time</th>
+    <th>Begin Date</th>
+    <th>End Date</th>
+  </tr> 
+  <tr>
+    <td><input type="text" id="EmployerName1" size="50"/></td>
+    <td><input type="text" id="Title1" size="33"/></td>
+    <td><input type="radio" name = "PTorFT1" value="PartTime1" size="10" /></td>
+    <td><input type="radio" name = "PTorFT1" value="FullTime1"/></td>
+    <td><input type="month" id="BeginDate1"/></td>
+    <td><input type="month" id="EndDate1"/></td>
+  </tr>
+  <tr>
+    <td><input type="text" id="EmployerName2" size="50"/></td>
+    <td><input type="text" id="Title2" size="33"/></td>
+    <td><input type="radio" name = "PTorFT2" value="PartTime2" /></td>
+    <td><input type="radio" name = "PTorFT2" value="FullTime2"/></td>
+    <td><input type="month" id="BeginDate2"/></td>
+    <td><input type="month" id="EndDate2"/></td>
+  </tr>
+  <tr>
+    <td><input type="text" id="EmployerName3" size="50"/></td>
+    <td><input type="text" id="Title3" size="33"/></td>
+    <td><input type="radio" name = "PTorFT3" value="PartTime3" /></td>
+    <td><input type="radio" name = "PTorFT3" value="FullTime3"/></td>
+    <td><input type="month" id="BeginDate3"/></td>
+    <td><input type="month" id="EndDate3"/></td>
+  </tr>
+  <tr>
+    <td><input type="text" id="EmployerName4" size="50"/></td>
+    <td><input type="text" id="Title4" size="33"/></td>
+    <td><input type="radio" name = "PTorFT4" value="PartTime4" /></td>
+    <td><input type="radio" name = "PTorFT4" value="FullTime4"/></td>
+    <td><input type="month" id="BeginDate4"/></td>
+    <td><input type="month" id="EndDate4"/></td>
+  </tr>
+  <tr>
+    <td><input type="text" id="EmployerName5" size="50"/></td>
+    <td><input type="text" id="Title5" size="33"/></td>
+    <td><input type="radio" name = "PTorFT5" value="PartTime5" /></td>
+    <td><input type="radio" name = "PTorFT5" value="FullTime5"/></td>
+    <td><input type="month" id="BeginDate5"/></td>
+    <td><input type="month" id="EndDate5"/></td>
+  </tr>
+  <tr>
+    <td><input type="text" id="EmployerName6" size="50"/></td>
+    <td><input type="text" id="Title6" size="33"/></td>
+    <td><input type="radio" name = "PTorFT6" value="PartTime6" /></td>
+    <td><input type="radio" name = "PTorFT6" value="FullTime6"/></td>
+    <td><input type="month" id="BeginDate6"/></td>
+    <td><input type="month" id="EndDate6"/></td>
+  </tr>
+  <tr>
+    <td><input type="text" id="EmployerName7" size="50"/></td>
+    <td><input type="text" id="Title7" size="33"/></td>
+    <td><input type="radio" name = "PTorFT7" value="PartTime7" /></td>
+    <td><input type="radio" name = "PTorFT7" value="FullTime7"/></td>
+    <td><input type="month" id="BeginDate7"/></td>
+    <td><input type="month" id="EndDate7"/></td>
+  </tr>
+  <tr>
+    <td><input type="text" id="EmployerName8" size="50"/></td>
+    <td><input type="text" id="Title8" size="33"/></td>
+    <td><input type="radio" name = "PTorFT8" value="PartTime8" /></td>
+    <td><input type="radio" name = "PTorFT8" value="FullTime8"/></td>
+    <td><input type="month" id="BeginDate8"/></td>
+    <td><input type="month" id="EndDate8"/></td>
+  </tr>
+  <tr>
+    <td><input type="text" id="EmployerName9" size="50"/></td>
+    <td><input type="text" id="Title9" size="33"/></td>
+    <td><input type="radio" name = "PTorFT9" value="PartTime9" /></td>
+    <td><input type="radio" name = "PTorFT9" value="FullTime9"/></td>
+    <td><input type="month" id="BeginDate9"/></td>
+    <td><input type="month" id="EndDate9"/></td>
+  </tr>
+  <tr>
+    <td><input type="text" id="EmployerName10" size="50"/></td>
+    <td><input type="text" id="Title10" size="33"/></td>
+    <td><input type="radio" name = "PTorFT10" value="PartTime10" /></td>
+    <td><input type="radio" name = "PTorFT10" value="FullTime10"/></td>
+    <td><input type="month" id="BeginDate10"/></td>
+    <td><input type="month" id="EndDate10"/></td>
+  </tr>
+</table>
+<br>
+<input type="submit" value="Calculate!" onclick= "CacluateTotalWorkTime()">
+
+<p id="ShowAllCalculations">
+
+</p>
+
+
+<P style="page-break-before: always">
+
+
+
+
+
+<div hidden id = "departmentalEquityShow">
+<h3>Departmental Equity:</h3>
+
+<table id= "departmentalEquity" style="width:30%">
+  <tr>
+    <th>Peer Name</th>
+    <th>Total Months of Experience</th>
+    <th>Rate</th>
+    <th>Hire Date</th>
+  </tr>
+  <tr>
+    <td><input type="text" id="PeerName1" size="50"/></td>
+    <td><input type="number" id="Months1" size="10"/></td>
+    <td><input type="number" id="Rate1" size="10" step='0.01' min="-9999999999.99" max="9999999999.99" placeholder='0.00'/></td>
+    <td><input type="month" id="date1"/></td>
+  </tr>
+  <tr>
+    <td><input type="text" id="PeerName2" size="50"/></td>
+    <td><input type="number" id="Months2" size="10"/></td>
+    <td><input type="number" id="Rate2" size="10" step='0.01' min="-9999999999.99" max="9999999999.99" placeholder='0.00'/></td>
+    <td><input type="month" id="date2"/></td>
+  </tr>
+  <tr>
+    <td><input type="text" id="PeerName3" size="50"/></td>
+    <td><input type="number" id="Months3" size="10"/></td>
+    <td><input type="number" id="Rate3" size="10" step='0.01' min="-9999999999.99" max="9999999999.99" placeholder='0.00'/></td>
+    <td><input type="month" id="date3"/></td>
+  </tr>
+</table>
+<br>
+<input type="submit" value="Calculate!" onclick= "CalculateDepartmentalEquity()">
+<p id="ShowDepartmentalEquity">
+
+
+
+<h3>Recommended Zone:</h3>
+<p id = "recommendedZone">
+
+<h3>Zone Salary Range:</h3>
+<p id = "salaryRange">
+<p>
+Starting Range:
+<input type="number" id="startingRange" size="10" step='0.01' min="-9999999999.99" max="9999999999.99" placeholder='0.00'/>
+Ending Range:
+<input type="number" id="endingRange" size="10" step='0.01' min="-9999999999.99" max="9999999999.99" placeholder='0.00'/>
+
+<input type="submit" value="Calculate!" onclick= "CalculateEstimatedSalary()">
+
+
+
+<h3>Salary Calculations: </h3>
+
+
+A)  Difference between beginning of zone and peer salary average: <br>
+<p id = "difference"></p>
+
+
+
+B)  A divided by average peer years of experience: <br>
+<p id = "division"></p>
+
+
+C)  Number of years candidate exceeds minimum qualifications: <br>
+<p id = "exceeds"></p>
+
+
+D)  Annual rate years of experience = B * C: <br>
+<p id = "experience"></p>
+
+
+E)  D + Zone entry amount:<br>
+<p id = "suggestedRate"></p>
+
+</div>
+
+
+
+<h3>Recommended Salary:</h3>
+<p>
+Recommended Salary:
+</p>
+<h3>Comments:</h3>
+<textarea rows="5" cols="150" maxlength= "400" style="overflow:hidden;resize:none" onkeypress="countLines(this)" ></textarea>
+
+<br>
+<h3>Departmental Sign-off:</h3>
+
+Prepared by:<br>
+<input type="text" name="Prepared By">
+
+Date Prepared:
+<input type="date" id ="DatePrepared">
+<br>
+Reviewed by:<br>
+<input type="text" name="Reviewed By:">
+Date:______________________________________<br>
+Approved By:<br>
+<input type="text" name="Approved By">
+Date:______________________________________<br>
+
+<br>
+
+<button type="button" onclick="window.print()">Save or Print</button>
+
+
+
+
+
+
+<script>
+var lines = 1;
+var keynum;
+var _buffer;
+// omg. thank you:
+// https://stackoverflow.com/questions/28905965/textarea-how-to-count-wrapped-lines-rows
+function $(selector) {
+    return document.querySelector(selector);
+}
+
+$('#textarea').oninput = function(e) {
+    //$('#lineCount').textContent = countLines(e.target);
+    var number = parseInt(countLines(e.target));
+    if (number >=5)
+    alert("Please keep the number of rows to 5 lines");
+}
+
+function countLines(textarea) {
+    if (_buffer == null) {
+        _buffer = document.createElement('textarea');
+        _buffer.style.border = 'none';
+        _buffer.style.height = '0';
+        _buffer.style.overflow = 'hidden';
+        _buffer.style.padding = '0';
+        _buffer.style.position = 'absolute';
+        _buffer.style.left = '0';
+        _buffer.style.top = '0';
+        _buffer.style.zIndex = '-1';
+        document.body.appendChild(_buffer);
+    }
+
+    var cs = window.getComputedStyle(textarea);
+    var pl = parseInt(cs.paddingLeft);
+    var pr = parseInt(cs.paddingRight);
+    var lh = parseInt(cs.lineHeight);
+
+    // [cs.lineHeight] may return 'normal', which means line height = font size.
+    if (isNaN(lh)) lh = parseInt(cs.fontSize);
+
+    // Copy content width.
+    _buffer.style.width = (textarea.clientWidth - pl - pr) + 'px';
+
+    // Copy text properties.
+    _buffer.style.font = cs.font;
+    _buffer.style.letterSpacing = cs.letterSpacing;
+    _buffer.style.whiteSpace = cs.whiteSpace;
+    _buffer.style.wordBreak = cs.wordBreak;
+    _buffer.style.wordSpacing = cs.wordSpacing;
+    _buffer.style.wordWrap = cs.wordWrap;
+
+    // Copy value.
+    _buffer.value = textarea.value;
+
+    var result = Math.floor(_buffer.scrollHeight / lh);
+    if (result == 0) result = 1;
+    return result;
+}
+function limitLines(obj, e) {
+
+  var text = obj.value;
+  if (text.match(/\r|\n/g) && text.match(/\r|\n/g).length != null)
+  var match = text.match(/\r|\n/g).length;
+
+  var count = 0;
+  console.log("text = " + text);
+  console.log("match = " + match);
+
+
+        // IE
+        if(window.event) {
+          keynum = e.keyCode;
+        // Netscape/Firefox/Opera
+        } else if(e.which) {
+          keynum = e.which;
+        }
+
+        if(keynum == 13) {
+          if(lines == obj.rows) {
+            alert('Please Limit to 5 rows');
+            return false;
+          }else {
+            lines++;
+          }
+        }
+        console.log("lines = " + lines + "obj.rows = " + obj.rows);
+      }
+
+
+
+function CalculateEstimatedSalary(){
+  var startingSalaryRange = parseFloat(document.getElementById("startingRange").value);
+  var peerSalaryAverage = parseFloat(returnAverageMoneyFromPeers());
+  var peerAverageYears = parseFloat(returnAverageMonthsFromPeers());
+  peerAverageYears = getAverageYearsFromMonths(peerAverageYears);
+  var outputDifference = document.getElementById("difference");
+  var outputDivision = document.getElementById("division");
+  var outputExperience = document.getElementById("experience");
+  var outputSuggestedRate = document.getElementById("suggestedRate");
+  var differenceInSalary = 0.00;
+  var differenceInValue = 0;
+  outputDifference.innerHTML="";
+  outputDivision.innerHTML= "";
+  differenceInSalary = Math.abs(parseFloat(peerSalaryAverage - startingSalaryRange));
+  differenceInSalary = differenceInSalary.toFixed(2);
+
+  outputDifference.innerHTML+= "Peer Average - Zone Starting Salary = " +  peerSalaryAverage + " - " + startingSalaryRange + " = " + differenceInSalary + "<br>";
+
+  differenceInValue = parseFloat(differenceInSalary/peerAverageYears);
+  outputDivision.innerHTML+= differenceInSalary + " / " + peerAverageYears + " = " + differenceInValue + "<br>";
+
+}
+function getAverageYearsFromMonths(num){
+  var years = parseFloat( num/12);
+  years = Math.round(years);
+  return years;
+}
+
+
+function returnTotalNumberOfMonthsFromPeers()
+{
+  var totalNumberOfMonthsFromPeers = 0;
+  var departmentalEquity = document.getElementById("departmentalEquity");
+  var temp;
+  for (let i= 1; i < departmentalEquity.rows.length; i++)
+    {
+    if (departmentalEquity.rows[i].cells[1].children[0].value) {
+      totalNumberOfMonthsFromPeers += parseInt(departmentalEquity.rows[i].cells[1].children[0].value);
+      console.log("i = " + i + "totalNumberOfMonthsFromPeers" + totalNumberOfMonthsFromPeers + " temp= " + temp + "departmentalEquity.rows[i].cells[1].children[0].value= " + departmentalEquity.rows[i].cells[1].children[0].value);
+    }
+  }
+  console.log("totalNumberOfMonthsFromPeers= " + totalNumberOfMonthsFromPeers);
+  return totalNumberOfMonthsFromPeers.toFixed(2);
+}
+
+function returnTotalAmountOfMoneyFromPeers(){
+  var departmentalEquity = document.getElementById("departmentalEquity");
+  var totalAmountOfMoneyFromPeers = 0.00;
+  for (let i= 1; i < departmentalEquity.rows.length; i++)
+    {
+      if (departmentalEquity.rows[i].cells[2].children[0].value){
+        totalAmountOfMoneyFromPeers += parseFloat(departmentalEquity.rows[i].cells[2].children[0].value);
+      }
+
+    }
+    console.log("totalAmountOfMoneyFromPeers" + totalAmountOfMoneyFromPeers);
+    return totalAmountOfMoneyFromPeers.toFixed(2);
+}
+
+function returnAverageMonthsFromPeers(){
+  var totalNumberOfMonthsFromPeers = 0;
+  var average = 0;
+  var departmentalEquity = document.getElementById("departmentalEquity");
+  var temp;
+  var count = 0;
+  for (let i= 1; i < departmentalEquity.rows.length; i++)
+    {
+    if (departmentalEquity.rows[i].cells[1].children[0].value) {
+      totalNumberOfMonthsFromPeers += parseInt(departmentalEquity.rows[i].cells[1].children[0].value);
+      count++;
+      //console.log("i = " + i + "totalNumberOfMonthsFromPeers" + totalNumberOfMonthsFromPeers + " temp= " + temp + "departmentalEquity.rows[i].cells[1].children[0].value= " + departmentalEquity.rows[i].cells[1].children[0].value);
+    }
+  }
+  average = parseFloat(totalNumberOfMonthsFromPeers/count);
+  return average.toFixed(2);
+}
+
+function returnAverageMoneyFromPeers(){
+  var departmentalEquity = document.getElementById("departmentalEquity");
+  var totalAmountOfMoneyFromPeers = 0.00;
+  var average = 0;
+  var count = 0;
+  for (let i= 1; i < departmentalEquity.rows.length; i++)
+    {
+      if (departmentalEquity.rows[i].cells[2].children[0].value){
+        totalAmountOfMoneyFromPeers += parseFloat(departmentalEquity.rows[i].cells[2].children[0].value);
+        count++;
+      }
+
+    }
+    average = parseFloat(totalAmountOfMoneyFromPeers/count);
+    //console.log("totalAmountOfMoneyFromPeers" + totalAmountOfMoneyFromPeers);
+    return average.toFixed(2);
+}
+function CalculateDepartmentalEquity(){
+  var departmentalEquity = document.getElementById("departmentalEquity");
+  var outputDepartmentalData = document.getElementById("ShowDepartmentalEquity");
+  outputDepartmentalData.innerHTML = "";
+  var totalNumberOfMonthsFromPeers = 0;
+  var totalAmountOfMoneyFromPeers = 0.00;
+  var averageMonthsFromPeers = 0;
+  var averageMoneyFromPeers = 0.00;
+
+
+      totalNumberOfMonthsFromPeers = returnTotalNumberOfMonthsFromPeers();
+      totalAmountOfMoneyFromPeers = returnTotalAmountOfMoneyFromPeers();
+      averageMonthsFromPeers = returnAverageMonthsFromPeers();
+      averageMoneyFromPeers = returnAverageMoneyFromPeers();
+      outputDepartmentalData.innerHTML += "Total Number of Months = " + totalNumberOfMonthsFromPeers + " Total Amount Of Money= " + totalAmountOfMoneyFromPeers + "<br>";
+      outputDepartmentalData.innerHTML += "Average Months = " + averageMonthsFromPeers +" Average Amount Of Money" + averageMoneyFromPeers + "<br>";
+      outputDepartmentalData.innerHTML += "Average Years  = " + getAverageYearsFromMonths(averageMonthsFromPeers) + "<br>";
+
+
+
+
+
+  return;
+}
+
+function CacluateTotalWorkTime(){
+  var ListOfEmployement = document.getElementById( "ListOfEmployement" );
+  var numberOfJobs = document.getElementById("ListOfEmployement").rows.length - 1;
+  var startDt = document.getElementById("BeginDate1").value;
+  var endDt = document.getElementById("EndDate1").value;
+
+  var tableArray = [];
+  var FullTimeArray = [];
+  var FullTimeArrayFinal = [];
+  var PartTimeArrayFinal = [];
+  var FullTimeCounter = 0;
+  var PartTimeArray = [];
+  var PartTimeCounter = 0;
+  var StartDateA;
+  var EndDateA;
+  var StartDate;
+  var EndDateB;
+  var count = 0;
+  var LongestDate;
+  var TotalFullTimeMonthsOverlapping = 0;
+  var TotalMonthsNonOverlapping = 0;
+  var TotalMonthsOverlapping = 0;
+  var TotalFullTimeMonthsNonOverlapping = 0;
+  var TotalFullTimeMonthsLastElement = 0;
+  var TotalMonthsLastElement;
+  var TotalMonths = 0;
+  var LastElement = false;
+  var abort = false;
+  var LastElementOverlapped = false;
+  var totalPartTime = 0;
+  var totalFullTime = 0;
+  var totalSum = 0;
+
+
+
+
+
+//Okay, here is the first step:
+
+
+
+// This loop goes through the "Candidate Applicable Experience" table and
+// finds the elements that are marked to be used; Radio button and dates MUST be entered.
+// Counts the number of jobs.
+for (let i = 1; i< numberOfJobs; i++)
+{
+
+  //only come here if a radio button is pressed and there is a date value.
+  if ((ListOfEmployement.rows[i].cells[2].children[0].checked == true || ListOfEmployement.rows[i].cells[3].children[0].checked == true)  && (ListOfEmployement.rows[i].cells[4].children[0].value  || ListOfEmployement.rows[i].cells[5].children[0].value))
+  {
+    count++;
+  }
+   FullTimeArrayFinal[i-1] = [];
+   PartTimeArrayFinal[i-1] = [];
+}
+
+//console.log("list of employment length: " + document.getElementById("ListOfEmployement").rows.length + "\n");
+
+console.log("Number of Jobs: " + count+ "\n");
+
+
+// Now it's time to sort. Bubble sort. Not the best, but easy to implement
+// All the rows are being sorted starting by the earliest start date.
+
+ var swapped;
+ var temp;
+ table = document.getElementById("ListOfEmployement");
+ var rows = table.getElementsByTagName("TR");
+ do {
+   swapped = false;
+   for (let k = 1; k < (count); k++) {
+     if (ListOfEmployement.rows[k+1].cells[4].children[0].value < ListOfEmployement.rows[k].cells[4].children[0].value) {
+       //console.log("ListOfEmployement.rows[k+1].cells[4].children[0].value: " + ListOfEmployement.rows[k+1].cells[4].children[0].value+ "\n");
+       rows[k].parentNode.insertBefore(rows[k + 1], rows[k]);
+
+       swapped = true;
+      // console.log("ListOfEmployement.rows[k+1].cells[4].children[0].value: " + ListOfEmployement.rows[k+1].cells[4].children[0].value+ "\n");
+     }
+   }
+ } while (swapped)
+
+//console.log("count: " + count+ "\n");
+
+
+// Done sorting. Now its time to check for overlap.
+// First check if two radio buttons are checked for full time
+// Grab all Full times and add to an array.
+
+
+
+// I'm going throw all the jobs and seeing if a full time job is selected.
+// If so, i will add it to the FullTimeArray.
+
+for (let i = 0; i < count; i++)
+{
+  if (ListOfEmployement.rows[i+1].cells[3].children[0].checked == true)
+  {
+    FullTimeArray[FullTimeCounter] = i+1;
+    FullTimeCounter++;
+  }
+}
+
+// I'm grabbing all part time jobs and adding them to the PartTimeArray list.
+for (let i = 0; i < count; i++)
+{
+  if (ListOfEmployement.rows[i+1].cells[2].children[0].checked == true)
+  {
+    PartTimeArray[PartTimeCounter] = i+1;
+    PartTimeCounter++;
+  }
+}
+
+
+// Check for full time overlap for  full time jobs
+if (FullTimeCounter >= 1)
+  {
+    FullTimeCounter = 0;
+    for (let i=0; i < FullTimeArray.length; i++)
+    {
+
+        abort = false;
+        StartDateA= ListOfEmployement.rows[FullTimeArray[i]].cells[4].children[0].value;
+        StartDate = StartDateA;
+        EndDateA = ListOfEmployement.rows[FullTimeArray[i]].cells[5].children[0].value;
+        LongestDate = EndDateA;
+        if ( i == (FullTimeArray.length - 1))
+        {
+          FullTimeArrayFinal[FullTimeCounter][0] = StartDate;
+          FullTimeArrayFinal[FullTimeCounter][1] = LongestDate;
+          console.log("done");
+          FullTimeCounter++;
+        }
+
+
+
+        for (let j=(i+1); j < FullTimeArray.length && !abort; j++)
+        {
+          StartDateB = ListOfEmployement.rows[FullTimeArray[j]].cells[4].children[0].value;
+          EndDateB = ListOfEmployement.rows[FullTimeArray[j]].cells[5].children[0].value;
+          //overlap exist if this condition is met
+          if ((StartDateA <= EndDateB)  &&  (LongestDate >= StartDateB))
+          {
+            //console.log("StartDate= " + StartDate + "LongestDate= " + LongestDate);
+            // greater means most recent
+            if (EndDateB > LongestDate)
+            {
+              LongestDate = EndDateB;
+              //console.log("LongestDate: " + LongestDate);
+            }
+            console.log("overlap " + j);
+            if (j == (FullTimeArray.length - 1))
+            {
+              //console.log("here")
+              LongestDate = EndDateB;
+              FullTimeArrayFinal[FullTimeCounter][0] = StartDate;
+              FullTimeArrayFinal[FullTimeCounter][1] = LongestDate;
+              FullTimeCounter++;
+              i=(j+1);
+            }
+          }
+
+        //No overlap. So this is where we end.
+        else
+          {
+            console.log("you've entered here this many times: " + (i+1) + "and j= " + j);
+            FullTimeArrayFinal[FullTimeCounter][0] = StartDate;
+            FullTimeArrayFinal[FullTimeCounter][1] = LongestDate;
+            abort = true;
+            i=(j-1);
+            FullTimeCounter++;
+          }
+
+        }
+
+        }
+}
+
+var outputData = document.getElementById("ShowAllCalculations");
+outputData.innerHTML = "";
+for (let i= 0; i <FullTimeCounter; i++)
+{
+
+  if (i == 0)
+  {
+  outputData.innerHTML += "Here are all the full time counted <br>";
+  }
+  console.log("i= "+ i + "Here are all the full time counted. StartDate: " + FullTimeArrayFinal[i][0] + " EndDate: " + FullTimeArrayFinal[i][1] + " Number of months= " + getNumberOfMonths(FullTimeArrayFinal[i][0],FullTimeArrayFinal[i][1]));
+  outputData.innerHTML += "StartDate: " + FullTimeArrayFinal[i][0] + " EndDate: " + FullTimeArrayFinal[i][1] + " Number of months= " + getNumberOfMonths(FullTimeArrayFinal[i][0],FullTimeArrayFinal[i][1]) + "<br>";
+  totalFullTime += getNumberOfMonths(FullTimeArrayFinal[i][0],FullTimeArrayFinal[i][1]);
+}
+
+console.log("total number of full time months: " + totalFullTime);
+
+
+if (PartTimeCounter >=1 && PartTimeArray.length!=0)
+{
+
+  PartTimeCounter = 0;
+  for (let i=0; i < PartTimeArray.length; i++)
+  {
+    abort = false;
+    StartDateA= ListOfEmployement.rows[PartTimeArray[i]].cells[4].children[0].value;
+    StartDate = StartDateA;
+    EndDateA = ListOfEmployement.rows[PartTimeArray[i]].cells[5].children[0].value;
+    LongestDate = EndDateA;
+    console.log("here is the first values: StartDate=" + StartDate + "LongestDate" + LongestDate);
+
+    for (let j=0; j < FullTimeCounter && !abort; j++)
+    {
+      StartDateB = FullTimeArrayFinal[j][0];
+      EndDateB = FullTimeArrayFinal[j][1];
+      console.log("here are the next values to check: StartDateB= "+ StartDateB + " EndDateB= " + EndDateB);
+      //overlap exist if this condition is met
+      if ((StartDate <= EndDateB)  &&  (LongestDate >= StartDateB))
+      {
+        console.log("Overlap exists at j = " + j);
+         //greater means most recent
+        if (StartDate > StartDateB)
+        {
+          console.log("j= " + j + "StartDateA > StartDateB");
+          if (EndDateA > EndDateB )
+          {
+            StartDate = EndDateB.stepup(1);
+            LongestDate = EndDateA;
+          }
+          else {
+            //Ignore since this date is not counted
+            console.log("this date is not counted: StarDate: " + StartDate + " StartDateB= " + StartDateB);
+            StartDate = undefined;
+            LongestDate = undefined;
+            abort = true;
+
+          }
+        }
+        else if (StartDate < StartDateB)
+        {
+          console.log("j= " + j + "StartDate < StartDateB");
+          console.log("StartDate= "+ StartDate + "StartDateB" + StartDateB);
+          if (EndDateA > EndDateB)
+          {
+            console.log("EndDateA > EndDateB");
+          //keep in mind to remove the months from the ft that is covering.
+          // This would need to be done in the end.
+
+
+          PartTimeArrayFinal[PartTimeCounter][0] = StartDate;
+          PartTimeArrayFinal[PartTimeCounter][1] = decreaseMonth(StartDateB,1);
+          console.log("PartTimeArrayFinal[PartTimeCounter][0]" + PartTimeArrayFinal[PartTimeCounter][0] + " PartTimeArrayFinal[PartTimeCounter][1] " + PartTimeArrayFinal[PartTimeCounter][1]);
+          PartTimeCounter++;
+          StartDate = increaseMonth(EndDateB,1);
+
+          }
+          else if (EndDateA <= EndDateB)
+          {
+            //StartDate = StartDateA;
+            LongestDate = decreaseMonth(StartDateB,1);
+          }
+
+        }
+        else if (StartDate == StartDateB)
+        {
+          console.log("j= "+ j + "StartDate == StartDateB");
+          if (EndDateA > EndDateB)
+          {
+            StartDate = increaseMonth(EndDateB,1);
+            LongestDate = EndDateA;
+            console.log("StarDate: " + StartDate + " LongestDate= " + LongestDate);
+            totalPartTime+= getNumberOfMonths(StartDate,LongestDate);
+            console.log("PART TIME = " + totalPartTime);
+
+          }
+          else
+          {
+            //ignore since this date is not counted.
+            console.log("this date is not counted: StarDate: " + StartDate + " StartDateB= " + StartDateB);
+            StartDate = undefined;
+            LongestDate = undefined;
+
+          }
+        }
+      }
+
+        //here is where you should add to the array once all full time lists are checked.
+        if (StartDate != undefined && (j==(FullTimeCounter-1)))
+        {
+        PartTimeArrayFinal[PartTimeCounter][0] = StartDate;
+        PartTimeArrayFinal[PartTimeCounter][1] = LongestDate;
+        PartTimeCounter++;
+        }
+    }
+    //if there is no full time, we should just add them to the list.
+    if (FullTimeCounter == 0 && FullTimeArray.length == 0)
+    {
+    PartTimeArrayFinal[PartTimeCounter][0] = StartDate;
+    PartTimeArrayFinal[PartTimeCounter][1] = LongestDate;
+    PartTimeCounter++;
+    }
+  }
+
+}
+
+
+
+if (PartTimeCounter== 1)
+{
+  for (let i= 0; i <PartTimeCounter; i++)
+  {
+    if (PartTimeArrayFinal[i][0] == undefined)
+    {}
+    else
+    console.log("here are all the part time counted: <br> StartDate: " + PartTimeArrayFinal[i][0] + " EndDate: " + PartTimeArrayFinal[i][1]);
+    totalPartTime += getNumberOfMonths(PartTimeArrayFinal[i][0],PartTimeArrayFinal[i][1]);
+    outputData.innerHTML += "<br> Here are all the part time counted: <br> StartDate: " + PartTimeArrayFinal[i][0] + " EndDate: " + PartTimeArrayFinal[i][1] + " Number of Months= " + totalPartTime + "<br>";
+
+  }
+  totalPartTime = getPartTimeCredit(totalPartTime);
+  console.log("Total Part time Credit: " + getPartTimeCredit(totalPartTime));
+}
+
+
+
+// Part time checker. 2 or more part time jobs must exist.
+if (PartTimeCounter >= 2 && PartTimeArrayFinal.length !=0)
+{
+  //PartTimeCounter = 0;
+  console.log("entered the pt/pt check");
+  var overlap = false;
+  var startHCdone = false;
+  var endHCdone = false;
+  var startFT;
+  var endFT;
+
+  for (let i= 0; i <PartTimeCounter; i++)
+  {
+    console.log("i= "+ i);
+    abort = false;
+    StartDateA= PartTimeArrayFinal[i][0]
+    //StartDate = StartDateA;
+    EndDateA = PartTimeArrayFinal[i][1];
+  //EndDateA  = increaseMonth(EndDateA,1);
+    //LongestDate = EndDateA;
+    if (startFT == "" || startFT == undefined)
+    {
+      StartDate = StartDateA;
+      LongestDate = EndDateA;
+    }
+    console.log("StartDate=" + StartDate + " EndDateA= " + EndDateA);
+
+    if ( i == (PartTimeCounter - 1) && overlap == false)
+    {
+      console.log("end did not overlap");
+      console.log("half credit given to dates:  StartDate= " + StartDateA + " EndDateA= " + EndDateA);
+      outputData.innerHTML += "half credit given to dates: " + StartDateA + " - " + EndDateA + " Total Number of Months: " + getNumberOfMonths(StartDateA,EndDateA) + "<br>";
+      totalPartTime+= getNumberOfMonths(StartDateA,EndDateA);
+
+    }
+    else if ( i == (PartTimeCounter - 1) && overlap == true)
+    {
+      console.log("end and overlapped");
+      console.log("half credit given to dates:  endFT= " + endFT + " EndDateA= " + EndDateA);
+      outputData.innerHTML += "half credit given to dates: " + endFT + " - " + EndDateA + " Total Number of Months: " + getNumberOfMonths(endFT,EndDateA) + "<br> ";
+      totalPartTime+= getNumberOfMonths(endFT,EndDateA);
+    }
+
+
+
+    for (let j=(i+1); j < PartTimeCounter && !abort; j++)
+    {
+      overlap = false;
+      console.log("j= " + j);
+      StartDateB = PartTimeArrayFinal[j][0];
+      EndDateB =   PartTimeArrayFinal[j][1];
+      if (StartDateB < StartDate)
+      {
+        StartDateB = StartDate;
+      }
+      console.log("2nd loop: StartDate=" + StartDate + " EndDateA= " + EndDateA);
+      console.log("2nd loop: StartDateB=" + StartDateB + " EndDateB= " + EndDateB);
+
+
+
+      //overlap exist if this condition is met
+      if ((StartDate <= EndDateB)  &&  (EndDateA >= StartDateB))
+      {
+        overlap = true;
+        console.log("OVERLAP");
+          if (StartDate < StartDateB)
+          {
+            console.log("StartDate < StartDateB");
+            console.log("StartDate=" + StartDate + " StartDateB= " + StartDateB);
+
+            if (EndDateA < EndDateB)
+            {
+              console.log ("EndDateA < EndDateB");
+              //LongestDate = EndDateA;
+              endFT = EndDateA;
+              startFT = StartDateB;
+              StartDate = endFT;
+              temp = decreaseMonth(StartDateB,1);
+              //LongestDate = EndDateB;
+
+              if (startHCdone == false)
+              {
+              startHCdone = true;
+              console.log("half credit given to dates: StartDateA= " + StartDateA + " temp= " + temp);
+              totalPartTime+=getNumberOfMonths(StartDateA,temp);
+              console.log("PART TIME = " + totalPartTime);
+              }
+
+              console.log("full credit given to dates: startFT= " + startFT + " endFT= "+ endFT);
+              totalFullTime += getNumberOfMonths(startFT,endFT);
+              abort = true;
+            }
+            else
+            {
+              //EndDateA >= EndDateB
+              //LongestDate = EndDateB;
+
+              endFT = EndDateB;
+              startFT = StartDateB;
+              temp = decreaseMonth(StartDateB,1);
+              if (startHCdone == false)
+              {
+              startHCdone = true;
+              console.log("half credit given to dates: StartDateA= " + StartDateA + " temp= " + temp);
+              totalPartTime+=getNumberOfMonths(StartDateA,temp);
+              outputData.innerHTML += "half credit given to dates: " + StartDateA + " - " + temp + " Total Number of Months: " + getNumberOfMonths(StartDateA,temp) + "<br> ";
+              console.log("PART TIME = " + totalPartTime);
+              }
+              //console.log("half credit given to dates: ");
+              console.log("full credit given to dates: startFT= " + startFT + " endFT= "+ endFT);
+              totalFullTime += getNumberOfMonths(startFT,endFT);
+              StartDate = increaseMonth(EndDateB,1);
+              outputData.innerHTML += "Full credit given to dates: " + startFT + " - " + endFT + " Total Number of Months: " + getNumberOfMonths(startFT,endFT) + "<br> ";
+            }
+
+          }
+          else if (StartDate == StartDateB)
+          {
+            console.log("start dates match");
+            if (EndDateB > EndDateA)
+            {
+              LongestDate = EndDateA;
+              startFT = StartDateB;
+              endFT = EndDateA;
+              console.log("EndDateB > EndDateA");
+              if (startHCdone == false)
+              {
+              startHCdone = true;
+              console.log("half credit given to dates: StartDateA= " + StartDateA + " temp= " + temp);
+              totalPartTime+=getNumberOfMonths(StartDateA,temp);
+              console.log("PART TIME = " + totalPartTime);
+              }
+              console.log("full credit given to dates: startFT= " + startFT + " endFT= "+ endFT);
+              totalFullTime += getNumberOfMonths(startFT,endFT);
+            }
+            else if (EndDateB == EndDateA)
+            {
+              LongestDate = EndDateB;
+              console.log("EndDateB == EndDateA");
+              console.log("No half credit. All Full Credit");
+              console.log("full credit given to dates: StartDate= " + StartDate + " LongestDate= "+ LongestDate );
+              outputData.innerHTML += "Full credit given to dates: " + StartDate + " - " + LongestDate + " Total Number of Months: " + getNumberOfMonths(StartDate,LongestDate) + "<br> ";
+              totalFullTime += getNumberOfMonths(StartDate,LongestDate);
+              StartDate = EndDateA;
+              i = j;
+            }
+            else {
+              LongestDate = EndDateB;
+              console.log("else: LongestDate = EndDateB");
+              console.log("half credit given to dates: StartDate= " + StartDate + " EndDateA= " + EndDateA);
+              outputData.innerHTML += "Full credit given to dates: " + StartDate + " - " + EndDateA + " Total Number of Months: " + getNumberOfMonths(StartDate,EndDateA) + "<br> ";
+              totalPartTime+=getNumberOfMonths(StartDate,EndDateA);
+              console.log("full credit given to dates: StartDate= " + StartDate + " LongestDate= "+ LongestDate );
+              console.log("PART TIME = " + totalPartTime);
+              outputData.innerHTML += "Full credit given to dates: " + StartDate + " - " + LongestDate + " Total Number of Months: " + getNumberOfMonths(StartDate,LongestDate) + "<br> ";
+              totalFullTime += getNumberOfMonths(StartDate,LongestDate);
+            }
+          }
+          //abort = true;
+        }
+
+      // no overlap. Half credit given
+      else if (overlap == false){
+        console.log("half credit given to dates:  StartDate= " + StartDateA + " EndDateA= " + EndDateA);
+        outputData.innerHTML += "half credit given to dates: " + StartDateA + " - " + EndDateA + " Total Number of Months: " + getNumberOfMonths(StartDateA,EndDateA) + "<br>";
+        totalPartTime+=getNumberOfMonths(StartDateA,EndDateA);
+        console.log("PART TIME = " + totalPartTime);
+        i=(j-1);
+        abort = true;
+      }
+    }
+  }
+
+
+//give credit to all part time months.
+
+outputData.innerHTML += "Total Part Time Months: " + totalPartTime + "<br>";
+outputData.innerHTML += "Total Full Time Months: " + totalFullTime + "<br>";
+totalPartTime = getPartTimeCredit(totalPartTime);
+outputData.innerHTML += "Total Part Time Credit: " + totalPartTime + "<br>";
+outputData.innerHTML += "Total Full Time Credit: " + totalFullTime + "<br>";
+}
+
+
+
+//done. Finally, add all part time and fulltimeMonths:
+totalSum= totalPartTime + totalFullTime;
+totalYear = totalSum/12;
+totalYear = totalYear.toFixed(3);
+console.log("Total Credit:" + totalSum);
+outputData.innerHTML +="Total Credit:" + totalSum + "<br>";
+outputData.innerHTML += "Total Years = " + "Total Full Time Credit + Total Part Time Credit = " + totalFullTime + " + " + totalPartTime +  " = " + totalSum  + "/12(year) = " + totalYear + "<br>";
+getZones(totalYear);
+
+}
+
+function getZones(totalYear)
+{
+  var outputZone = document.getElementById("recommendedZone");
+  outputZone.innerHTML = "";
+
+  if (totalYear <= 4)
+  {
+    //zone 1
+    outputZone.innerHTML = "Zone 1"
+  }
+
+  else if (totalYear > 4 && totalYear <= 7)
+  {
+    //zone 2
+    outputZone.innerHTML = "Zone 2"
+  }
+  else if (totalYear > 7 && totalYear <=10 )
+  {
+    //zone 3
+    outputZone.innerHTML = "Zone 3"
+  }
+  else if (totalYear > 10)
+  {
+    //zone 4
+    outputZone.innerHTML = "Zone 4"
+  }
+
+}
+
+
+
+
+function getPartTimeCredit(numberOfMonths)
+{
+
+var totalCredit = 0;
+    totalCredit = (numberOfMonths*1) * 0.5;
+return totalCredit;
+
+}
+
+
+
+function getNumberOfMonths(startingDate,endingDate)
+{
+  var totalNumberOfMonths = 0;
+  parsedEndDate = endingDate.replace(/-/g, "");
+  EndDateYear = endingDate.substr(0,4);
+  EndDateMonth = endingDate.substr(5,2);
+
+  parsedStartDate = startingDate.replace(/-/g, "");
+  StartDateYear = startingDate.substr(0,4);
+  StartDateMonth = startingDate.substr(5,2);
+
+      if (EndDateMonth >= StartDateMonth)
+      {
+        FinalMonth = EndDateMonth - StartDateMonth;
+        FinalYear =  EndDateYear - StartDateYear;
+        totalNumberOfMonths = 1 + (FinalMonth + (FinalYear * 12));
+        //console.log("EndDateMonth >= StartDateMonth");
+      }
+      else if (EndDateMonth < StartDateMonth)
+      {
+        EndDateMonth = (EndDateMonth*1) + 12;
+        EndDateYear = (EndDateYear * 1) - 1;
+        FinalMonth = EndDateMonth - StartDateMonth;
+        //console.log("EndDateMonth" + EndDateMonth + "StartDateMonth" + StartDateMonth);
+        FinalYear =  EndDateYear - StartDateYear;
+        //console.log("final month= " + FinalMonth + "Final year= " + FinalYear);
+        totalNumberOfMonths = 1 + (FinalMonth + (FinalYear * 12));
+        //console.log("EndDateMonth < StartDateMonth");
+
+      }
+      //console.log("still in function getNumberOfMonths. totalNumberOfMonths= "  + totalNumberOfMonths);
+  return totalNumberOfMonths;
+}
+
+function decreaseMonth(date, decreaseNumber)
+{
+
+  var dateToParse = date;
+  var temp = dateToParse.substr(5,2);
+  var parsedYearInt = parseInt(dateToParse.substr(0,4));
+  var parsedMonthInt = parseInt(dateToParse.substr(5,2));
+  var tempMonth = 0;
+  var tempYear = 0;
+  var newMonth = "";
+  var newYear = "";
+
+
+  if (decreaseNumber >= parsedMonthInt)
+  {
+    parsedYearInt = parsedYearInt - 1;
+    newYear = parsedYearInt.toString();
+
+    parsedMonthInt = (parsedMonthInt + 12) - decreaseNumber;
+    if (parsedMonthInt <10)
+    {
+      parsedMonthInt = "0" + parsedMonthInt;
+    }
+
+    newMonth = parsedMonthInt.toString();
+
+    dateToParse = dateToParse.replace(dateToParse.substr(5,2),newMonth);
+    dateToParse = dateToParse.replace(dateToParse.substr(0,4),newYear);
+    //console.log("dateToParse= " + dateToParse);
+    date = dateToParse;
+    return date;
+  }
+  else {
+    newYear = parsedYearInt.toString();
+
+    parsedMonthInt = parsedMonthInt - decreaseNumber;
+    if (parsedMonthInt <10)
+    {
+      parsedMonthInt = "0" + parsedMonthInt;
+    }
+    newMonth = parsedMonthInt.toString();
+
+    dateToParse = dateToParse.replace(dateToParse.substr(5,2),newMonth);
+    dateToParse = dateToParse.replace(dateToParse.substr(0,4),newYear);
+
+      }
+
+  date = dateToParse;
+  //console.log("dateToParse= " + dateToParse);
+//  console.log("date= " + date);
+
+  return date;
+}
+
+
+function increaseMonth(date, increaseNumber)
+{
+
+  var dateToParse = date;
+  var temp = dateToParse.substr(5,2);
+  var parsedYearInt = parseInt(dateToParse.substr(0,4));
+  var parsedMonthInt = parseInt(dateToParse.substr(5,2));
+  var tempMonth = 0;
+  var tempYear = 0;
+  var newMonth = "";
+  var newYear = "";
+
+  var tempMonth = parsedMonthInt + increaseNumber;
+    //console.log("tempMonth= " + tempMonth);
+
+  if (tempMonth > 12)
+  {
+    tempMonth = tempMonth - 12;
+    if (tempMonth <10)
+    {
+      tempMonth = "0" + tempMonth;
+    }
+    newMonth = tempMonth.toString();
+
+    tempYear = parsedYearInt + 1;
+    newYear = tempYear.toString();
+
+    dateToParse = dateToParse.replace(dateToParse.substr(5,2),newMonth);
+    dateToParse = dateToParse.replace(dateToParse.substr(0,4),newYear);
+    //console.log("dateToParse= " + dateToParse);
+    date = dateToParse;
+    return date;
+  }
+  else {
+    if (tempMonth <10)
+    {
+      tempMonth = "0" + tempMonth
+    }
+    newMonth = tempMonth.toString();
+    tempYear = parsedYearInt;
+    NewYear = tempYear.toString();
+    console.log("parsedMonthInt= " + parsedMonthInt);
+    console.log("newMonth= " + newMonth);
+    console.log("Pre: dateToParse= " + dateToParse);
+    dateToParse = dateToParse.replace(dateToParse.substr(5,2),newMonth);
+    dateToParse.replace(dateToParse.substr(0,4),newYear);
+    console.log("Post: dateToParse= " + dateToParse);
+  }
+
+  date = dateToParse;
+  //console.log("dateToParse= " + dateToParse);
+//  console.log("date= " + date);
+
+  return date;
+
+
+}
+
+
+function FindEmployeeStatus() {
+
+  //block means it shows it
+  var EmployeeStatus = document.getElementById("EmployeeStatus").value;
+	var NewEmployee = document.getElementById("NewEmployee");
+  var CurrentEmployee = document.getElementById("CurrentEmployee");
+  var PastEmployeeCheck = document.getElementById("PastCoAEmployeeChecker");
+  var NotEligibleDisplay = document.getElementById('NotEligible');
+  var departmentalEquityDisplay = document.getElementById('departmentalEquityShow');
+
+      if (EmployeeStatus  == 'SelectOption') {
+        NewEmployee.style.display = 'none';
+        CurrentEmployee.style.display = 'none';
+        PastEmployeeCheck.style.display = 'none';
+        NotEligibleDisplay.style.display = 'none';
+        departmentalEquityDisplay.style.display = 'none';
+  }
+
+  else if (EmployeeStatus  == 'NewEmployee'){
+        NewEmployee.style.display = 'block';
+        CurrentEmployee.style.display = 'none';
+        PastEmployeeCheck.style.display = 'none';
+        departmentalEquityDisplay.style.display = 'none';
+
+    }
+	else if (EmployeeStatus  == 'CurrentEmployee'){
+        departmentalEquityDisplay.style.display = 'block';
+        CurrentEmployee.style.display = 'block';
+        NewEmployee.style.display = 'none';
+        PastEmployeeCheck.style.display = 'none';
+    }
+	else if (EmployeeStatus  == 'PastEmployee'){
+
+        PastEmployeeCheck.style.display = 'block';
+        CurrentEmployee.style.display = 'none';
+        departmentalEquityDisplay.style.display = 'none';
+	}
+
+}
+
+
+
+
+function FindEmployeeEligible(){
+
+var PastEmployeeCheckValue = document.getElementById("PastEmployeeCheck").value;
+var NotEligibleDisplay = document.getElementById('NotEligible');
+var NewEmployee = document.getElementById("NewEmployee");
+
+
+  if (PastEmployeeCheckValue  == 'SelectOption'){
+    NotEligibleDisplay.style.display = 'none';
+  }
+  else if (PastEmployeeCheckValue  == 'Yes'){
+        NewEmployee.style.display = 'block';
+        NotEligibleDisplay.style.display = 'block';
+    }
+    else if (PastEmployeeCheckValue == 'No'){
+      NotEligibleDisplay.style.display = 'block';
+      NewEmployee.style.display = 'none';
+
+
+}
+
+}
+
+</script>
+
+</body>
+
+</html>
